@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Dashboard</h2>
+        <!-- Formulário de filtro -->
+        <form method="get" class="mb-3 d-flex align-items-center">
+            <div class="form-group mr-2 mb-0 flex-grow-1">
+                <label for="name" class="sr-only">Filtrar por nome:</label>
+                <input type="text" name="name" class="form-control form-control-md" id="name" placeholder="Filtrar por nome" value="{{ request.GET.name }}">
+            </div>
+            <button type="submit" class="btn btn-success">Filtrar</button>
+        </form>
+        <a href="{% url 'item_add' %}" class="btn btn-primary mb-3">Adicionar</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>
+                        <a href="{% url 'item_detail' item.pk %}" class="btn btn-info btn-sm">Detalhes</a>
+                        <a href="{% url 'item_edit' item.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'item_delete' item.pk %}" class="btn btn-danger btn-sm">Deletar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Nenhum item encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

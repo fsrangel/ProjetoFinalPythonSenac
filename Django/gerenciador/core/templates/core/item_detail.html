@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2>{{ object.name }}</h2>
+        <p>{{ object.description }}</p>
+        <a href="{% url 'item_edit' object.pk %}" class="btn btn-warning">Editar</a>
+        <a href="{% url 'item_delete' object.pk %}" class="btn btn-danger">Deletar</a>
+        <a href="{% url 'item_list' %}" class="btn btn-secondary">Cancelar</a>
+    </div>
+</div>
+{% endblock %}
